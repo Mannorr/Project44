@@ -1,0 +1,88 @@
+/* ═══════════════════════════════════════════════════════════
+   PROJECT44 — main.js
+   Mobile navigation + contact form handling + year stamp
+   ═══════════════════════════════════════════════════════════ */
+
+(function () {
+  'use strict';
+
+  /* ─── Mobile Navigation Toggle ─── */
+  const toggle = document.querySelector('.nav-toggle');
+  const mobileMenu = document.querySelector('.nav-mobile');
+
+  if (toggle && mobileMenu) {
+    toggle.addEventListener('click', function () {
+      toggle.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      const isOpen = toggle.classList.contains('open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close menu when clicking a link
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        toggle.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* ─── Contact Form Handler ─── */
+  const form = document.querySelector('#contact-form');
+  if (form) {
+    const messageBox = form.querySelector('.form-message');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = form.querySelector('[name="name"]').value.trim();
+      const email = form.querySelector('[name="email"]').value.trim();
+      const message = form.querySelector('[name="message"]').value.trim();
+
+      if (!name || !email || !message) {
+        showMessage('Please fill out all required fields.', 'error');
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showMessage('Please enter a valid email address.', 'error');
+        return;
+      }
+
+      // Build mailto with form data (no backend required for MVP)
+      const subject = form.querySelector('[name="subject"]').value || 'General Enquiry';
+      const phone = form.querySelector('[name="phone"]')?.value || '';
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nSubject: ${subject}\n\nMessage:\n${message}`
+      );
+      const mailto = `mailto:theproject44@gmail.com?subject=${encodeURIComponent('[Website] ' + subject)}&body=${body}`;
+
+      window.location.href = mailto;
+      showMessage('Thank you! Your email client should open shortly. If not, email us directly at theproject44@gmail.com.', 'success');
+      form.reset();
+    });
+
+    function showMessage(text, type) {
+      if (!messageBox) return;
+      messageBox.textContent = text;
+      messageBox.className = 'form-message ' + type;
+      setTimeout(function () {
+        if (type === 'success') messageBox.className = 'form-message';
+      }, 8000);
+    }
+  }
+
+  /* ─── Footer year stamp ─── */
+  const yearSpan = document.querySelector('#current-year');
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+  /* ─── Mark active nav link based on current page ─── */
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a, .nav-mobile a').forEach(function (link) {
+    const href = link.getAttribute('href');
+    if (href === path || (path === '' && href === 'index.html')) {
+      link.classList.add('active');
+    }
+  });
+})();
