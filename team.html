@@ -6,7 +6,7 @@
   <title>Meet the Team — PROJECT44 Foundation</title>
   <meta name="description" content="Meet the passionate young people behind PROJECT44 — a faith-driven team dedicated to transforming the lives of vulnerable children in Nigeria." />
   <link rel="icon" type="image/png" href="assets/logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -46,9 +46,9 @@
 <section class="page-hero">
   <div class="container">
     <div class="page-hero-inner">
-      <span class="eyebrow hero-eyebrow">Meet the Core</span>
-      <h1>We Are PROJECT44.</h1>
-      <p>A group of young people who refused to wait for someone else to show up. Meet the core — the hands, hearts, and minds behind every outreach.</p>
+      <span class="eyebrow hero-eyebrow reveal">· Meet the Core ·</span>
+      <h1 class="reveal delay-1">We are <em>PROJECT44</em>.</h1>
+      <p class="reveal delay-2">A group of young people who refused to wait for someone else to show up. Meet the core — the hands, hearts, and minds behind every outreach.</p>
     </div>
   </div>
 </section>
@@ -59,8 +59,10 @@
     <div class="team-grid">
 
       <!-- Member 1 -->
-      <div class="team-card">
-        <div class="team-photo">ED</div>
+      <div class="team-card reveal">
+        <div class="team-photo">
+          <img src="assets/ene-ohemu.jpg" alt="Ene Deborah Ohemu" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('team-photo-initials'); this.parentElement.dataset.initials='ED';" />
+        </div>
         <div class="team-info">
           <h3>Ene Deborah Ohemu</h3>
           <span class="team-role">Founder</span>
@@ -69,8 +71,10 @@
       </div>
 
       <!-- Member 2 -->
-      <div class="team-card">
-        <div class="team-photo">OM</div>
+      <div class="team-card reveal delay-1">
+        <div class="team-photo">
+          <img src="assets/femi-mojoyinoluwa.jpg" alt="Femi-Olagundoye Mojoyinoluwa" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('team-photo-initials'); this.parentElement.dataset.initials='OM';" />
+        </div>
         <div class="team-info">
           <h3>Femi-Olagundoye Mojoyinoluwa</h3>
           <span class="team-role">Head of Operations, Lagos</span>
@@ -79,8 +83,10 @@
       </div>
 
       <!-- Member 3 -->
-      <div class="team-card">
-        <div class="team-photo">OA</div>
+      <div class="team-card reveal delay-2">
+        <div class="team-photo">
+          <img src="assets/ochanya-agbo.jpg" alt="Ochanya E. Agbo-Ojobo" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('team-photo-initials'); this.parentElement.dataset.initials='OA';" />
+        </div>
         <div class="team-info">
           <h3>Ochanya E. Agbo-Ojobo</h3>
           <span class="team-role">Head of Operations, Abuja</span>
@@ -89,8 +95,10 @@
       </div>
 
       <!-- Member 4 -->
-      <div class="team-card">
-        <div class="team-photo">AO</div>
+      <div class="team-card reveal delay-3">
+        <div class="team-photo">
+          <img src="assets/nifemi-adeniran.jpg" alt="Adeniran Oluwanifemi" loading="lazy" onerror="this.style.display='none'; this.parentElement.classList.add('team-photo-initials'); this.parentElement.dataset.initials='AO';" />
+        </div>
         <div class="team-info">
           <h3>Adeniran Oluwanifemi</h3>
           <span class="team-role">Head of Media Operations</span>
@@ -105,13 +113,13 @@
 <!-- JOIN US CTA -->
 <section class="section section-grey">
   <div class="container">
-    <div class="section-head" style="text-align:center; margin-left:auto; margin-right:auto;">
+    <div class="section-head reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
       <span class="eyebrow">Want to Serve?</span>
-      <h2>There's a Place for You Here.</h2>
+      <h2>There's a <em class="italic-accent">place</em> for you here.</h2>
       <p>PROJECT44 is always looking for passionate volunteers who want to be the hands and heart of Christ to children in need. If that sounds like you, we want to hear from you.</p>
     </div>
-    <div style="text-align:center; margin-top:32px;">
-      <a href="contact.html?subject=Volunteer" class="btn btn-primary btn-lg">Get in Touch</a>
+    <div class="reveal delay-1" style="text-align:center; margin-top:32px;">
+      <a href="contact.html?subject=Volunteer" class="btn btn-primary btn-lg">Get in Touch →</a>
     </div>
   </div>
 </section>
