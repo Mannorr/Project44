@@ -28,12 +28,14 @@
     });
   }
 
-  /* ─── Contact Form Handler ─── */
+  /* ─── Contact Form Handler (Formspree AJAX) ─── */
   const form = document.querySelector('#contact-form');
   if (form) {
     const messageBox = form.querySelector('.form-message');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.textContent : '';
 
-    form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
       const name = form.querySelector('[name="name"]').value.trim();
@@ -50,26 +52,49 @@
         return;
       }
 
-      // Build mailto with form data (no backend required for MVP)
-      const subject = form.querySelector('[name="subject"]').value || 'General Enquiry';
-      const phone = form.querySelector('[name="phone"]')?.value || '';
-      const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nSubject: ${subject}\n\nMessage:\n${message}`
-      );
-      const mailto = `mailto:theproject44@gmail.com?subject=${encodeURIComponent('[Website] ' + subject)}&body=${body}`;
+      const data = new FormData(form);
+      const endpoint = form.getAttribute('action');
 
-      window.location.href = mailto;
-      showMessage('Thank you! Your email client should open shortly. If not, email us directly at theproject44@gmail.com.', 'success');
-      form.reset();
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
+      showMessage('', '');
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          showMessage("Thank you! Your message has been sent — we'll be in touch soon.", 'success');
+          form.reset();
+        } else {
+          const result = await response.json().catch(function () { return null; });
+          const errMsg = result && result.errors
+            ? result.errors.map(function (er) { return er.message; }).join(', ')
+            : 'Something went wrong. Please email us directly at theproject44@gmail.com.';
+          showMessage(errMsg, 'error');
+        }
+      } catch (err) {
+        showMessage('Network error. Please email us directly at theproject44@gmail.com.', 'error');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+        }
+      }
     });
 
     function showMessage(text, type) {
       if (!messageBox) return;
       messageBox.textContent = text;
-      messageBox.className = 'form-message ' + type;
-      setTimeout(function () {
-        if (type === 'success') messageBox.className = 'form-message';
-      }, 8000);
+      messageBox.className = 'form-message' + (type ? ' ' + type : '');
+      if (type === 'success') {
+        setTimeout(function () { messageBox.className = 'form-message'; messageBox.textContent = ''; }, 10000);
+      }
     }
   }
 
