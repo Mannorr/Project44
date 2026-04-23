@@ -75,11 +75,11 @@
           const result = await response.json().catch(function () { return null; });
           const errMsg = result && result.errors
             ? result.errors.map(function (er) { return er.message; }).join(', ')
-            : 'Something went wrong. Please email us directly at theproject44@gmail.com.';
+            : 'Something went wrong. Please email us directly at theproject44nigeria@gmail.com.';
           showMessage(errMsg, 'error');
         }
       } catch (err) {
-        showMessage('Network error. Please email us directly at theproject44@gmail.com.', 'error');
+        showMessage('Network error. Please email us directly at theproject44nigeria@gmail.com.', 'error');
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;

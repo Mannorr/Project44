@@ -50,5 +50,5 @@ Deploys to any static host:
 
 ## Contact
 
-- Email: theproject44@gmail.com
+- Email: theproject44nigeria@gmail.com
 - Instagram: [@the_project44](https://instagram.com/the_project44)
